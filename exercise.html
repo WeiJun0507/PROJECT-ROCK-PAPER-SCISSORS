@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+
+    <body>
+        <script>
+            let choice = {
+                sel1 : 'rock',
+                sel2 : 'paper',
+                sel3 : 'scissors',
+            }
+            let count = {
+                user : 0,
+                comp : 0,
+                tie : 0,
+            }
+            function computerPlay() {
+                let number = parseInt((Math.random() * 3) + 1);
+                return (number === 1) ? choice.sel1 : (number === 2) ? choice.sel2 : choice.sel3;
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                let sec1 = playerSelection.charAt(0).toLowerCase();
+                let sec2 = computerSelection.charAt(0).toLowerCase();
+
+                if (playerSelection === computerSelection) {
+                    count.tie++;
+                    console.log("Both are equal.");
+                } else {
+                    switch ( sec1 + sec2) {
+                        case 'rs':
+                        case 'sp':
+                        case 'pr':
+                        count.user++;
+                        console.log(`You win!!! Player : ${playerSelection} beats Computer : ${computerSelection}`);
+                        break;
+
+                        case 'sr':
+                        case 'rp':
+                        case 'ps':
+                        count.comp++;
+                        console.log(`You lose! Try again next time. Computer : ${computerSelection} beats Player : ${playerSelection}`);
+                        break;
+
+                        default:
+                        console.log("You have something wrong");
+                    }
+                    
+                }
+            }
+            window.onload = function game() {
+                for (let i = 0; i < 5; i++) {
+                    const playerSelection = prompt("Enter your selection", choice.sel1);
+                    const computerSelection = computerPlay();
+                    console.log(playRound(playerSelection, computerSelection));
+                }
+
+                console.log('Player points : ' + count.user + ' : ' + count.comp + ' : Computer points');
+                if(count.user > count.comp) {
+                    console.log("Player win");
+                } else if (count.comp > count.user) {
+                    console.log("Computer win");
+                } else {
+                    console.log("Tie");
+                }
+            }
+            
+
+        </script>
+
+    </body>
+</html>
